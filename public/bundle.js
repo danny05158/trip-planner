@@ -104,7 +104,18 @@ eval("/* Mapbox GL JS is licensed under the 3-Clause BSD License. Full text of l
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("console.log('Hello from JavaScript');\n\nconst mapboxgl = __webpack_require__(/*! mapbox-gl */ \"./node_modules/mapbox-gl/dist/mapbox-gl.js\");\n\nmapboxgl.accessToken =\n  'pk.eyJ1IjoibGdyZWVzIiwiYSI6ImNqbWk1MXdzdDAxYjEzb3JwNG43ZnAzaDQifQ.Qcrgr5B7V8luah-y5fRT4Q';\n\nconst map = new mapboxgl.Map({\n  container: 'map',\n  center: [-87.6354, 41.8885], // FullStack NY coordinates; alternatively, use [-87.6354, 41.8885] for Chicago\n  zoom: 12, // starting zoom\n  style: 'mapbox://styles/mapbox/streets-v10', // mapbox has lots of different map styles available.\n});\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const buildMarker = __webpack_require__(/*! ./marker */ \"./src/marker.js\")\n\nconsole.log('Hello from JavaScript');\n\nconst mapboxgl = __webpack_require__(/*! mapbox-gl */ \"./node_modules/mapbox-gl/dist/mapbox-gl.js\");\n\nmapboxgl.accessToken =\n  'pk.eyJ1IjoibGdyZWVzIiwiYSI6ImNqbWk1MXdzdDAxYjEzb3JwNG43ZnAzaDQifQ.Qcrgr5B7V8luah-y5fRT4Q';\n\nconst map = new mapboxgl.Map({\n  container: 'map',\n  center: [-87.6354, 41.8885], // FullStack NY coordinates; alternatively, use [-87.6354, 41.8885] for Chicago\n  zoom: 12, // starting zoom\n  style: 'mapbox://styles/mapbox/streets-v10', // mapbox has lots of different map styles available.\n});\n\nlet hotel = buildMarker('activity')\nnew mapboxgl.Marker(hotel).setLngLat([-87.6354, 41.8885]).addTo(map);\n\n\n\n\n\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/marker.js":
+/*!***********************!*\
+  !*** ./src/marker.js ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\nlet buildMarker = function (type){\n  var element = document.createElement(\"div\")\n  element.style.width = '32px';\n  element.style.height = '39px';\n\n\n  if(type === 'hotel'){\n    element.style.backgroundImage = \"url(http://i.imgur.com/WbMOfMl.png)\";\n\n  }else if(type === 'restaurant'){\n    element.style.backgroundImage = \"url(http://i.imgur.com/D9574Cu.png)\";\n  }else if(type === 'activity'){\n    element.style.backgroundImage = \"url(http://i.imgur.com/cqR6pUI.png)\";\n  }\n  return element\n\n}\n\nmodule.exports = buildMarker;\n\n\n//# sourceURL=webpack:///./src/marker.js?");
 
 /***/ })
 
